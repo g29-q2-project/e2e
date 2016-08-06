@@ -14,13 +14,24 @@ block content
 								.move-up
 									h5.margin.white-text Start Location
 									input#origin-input.controls(type='text', name='trip_name', placeholder='starting location for your trip')
+									if locations
+										select#origin-dropdown
+											option(value='saved-trips', disabled='', selected='') Select a saved trip
+											for location in locations
+												option(value='#{location.name}') #{location.name}
+										label
 					.col.s12.m6.l6
 						.card
-							.card-move-up.teal.waves-effect.waves-block.waves-light
+							#trip-origin-card.card-move-up.teal.waves-effect.waves-block.waves-light
 								.move-up
 									h5.margin.white-text Destination Location
-									input#destination-input.controls(type='text', name='trip_name', placeholder='starting location for your trip')
-									.input-field.col.s12
+									input#destination-input.controls(type='text', name='trip_name', placeholder='ending location for your trip')
+									if locations
+										select#destination-dropdown
+											option(value='', disabled='', selected='') Select a saved trip
+											for location in locations
+												option(value='#{location.name}') #{location.name}
+										label
 				.row
 					.input-field.col.s5.m3.l4
 						select#mode
@@ -30,6 +41,7 @@ block content
 							option(value='BICYCLING', id='changemode-bicycling') Bicycling
 							option(value='WALKING', id='changemode-walking') Walking
 						label 
+
 					.col.s2.m2.offset-m1.l1.offset-l1
 						a#getDirections.btn-floating.valign.btn-large.waves-effect.waves-light.cyan
 							i.mdi-maps-directions
@@ -38,10 +50,9 @@ block content
 						//- button#showBike bike
 					.col.s12.m12.l12
 						#jon_map.mobile-map
-					
-					
+
+
 			// FOOTER
 			include ../../public/includes/footer.jade
 			// JS Scripts
 			include ../../public/includes/scripts.jade
-										

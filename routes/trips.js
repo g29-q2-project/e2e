@@ -5,6 +5,7 @@ var router = express.Router();
 var passport = require('passport')
 var googleMaps = require('../controllers/google_maps_api/GoogleMaps')
 var tripsController = require('../controllers/trips/tripsController')
+var userQueries = require('../controllers/database/users/userQueries');
 
 router.route('/')
   .get((req, res, next) => {
@@ -23,6 +24,10 @@ router.route('/')
 router.route('/new')
   .get((req, res, next) => {
     // load new trip tempate
+    userQueries.allLocations(req.session.passport.user).then(function(locations){
+      console.log(locations.rows);
+      console.log("hi");
+
     res.render('trips/new_trip', {
       title: 'e2e | New Trip',
       id: req.session.passport.user.id,
@@ -30,8 +35,10 @@ router.route('/new')
       firstname: req.session.passport.user.firstname,
       lastname: req.session.passport.user.lastname,
       fullname: req.session.passport.user.firstname + " " + req.session.passport.user.lastname,
-      email: req.session.passport.user.email
+      email: req.session.passport.user.email,
+      locations: locations.rows
       });
+    })
   })
   .post((req, res, next) => {
     // create new trip route
@@ -76,7 +83,7 @@ router.route('/delete/:id')
       });
   })
   .post((req, res, next) => {
-    // create new trip route
+
   })
   // router.route('/edit/:id')
   //   .get((req, res, next) => {
