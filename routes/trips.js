@@ -23,6 +23,22 @@ router.route('/')
 
 router.route('/new')
   .get((req, res, next) => {
+<<<<<<< HEAD
+    // load new trip tempate
+    userQueries.allLocations(req.session.passport.user).then(function(locations){
+    res.render('trips/new_trip', {
+      title: 'e2e | New Trip',
+      id: req.session.passport.user.id,
+      username: req.session.passport.user.username,
+      firstname: req.session.passport.user.firstname,
+      lastname: req.session.passport.user.lastname,
+      fullname: req.session.passport.user.firstname + " " + req.session.passport.user.lastname,
+      email: req.session.passport.user.email,
+      locations: locations.rows
+      });
+    })
+  })
+=======
     userQueries.allLocations(req.session.passport.user).then(function(locations) {
       res.render('trips/new_trip', {
         locations: locations.rows,
@@ -36,6 +52,7 @@ router.route('/new')
         });
       })
     })
+>>>>>>> 2eb49f897d9698ebfe2fd53573a05caf04a00abf
   .post((req, res, next) => {
     // create new trip route
     res.json(req.body)
@@ -80,7 +97,7 @@ router.route('/delete/:id')
       });
   })
   .post((req, res, next) => {
-    // create new trip route
+
   })
   // router.route('/edit/:id')
   //   .get((req, res, next) => {
