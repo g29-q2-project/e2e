@@ -25,9 +25,6 @@ router.route('/new')
   .get((req, res, next) => {
     // load new trip tempate
     userQueries.allLocations(req.session.passport.user).then(function(locations){
-      console.log(locations.rows);
-      console.log("hi");
-
     res.render('trips/new_trip', {
       title: 'e2e | New Trip',
       id: req.session.passport.user.id,

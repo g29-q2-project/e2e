@@ -65,7 +65,7 @@ function initMap() {
        // Add Adjustment to hit the select box
        var map = new google.maps.Map(document.getElementById('jon_map'), {
          mapTypeControl: false,
-         center: {lat: -33.8688, lng: 151.2195},
+         center: {lat: 39.7392, lng: -104.9903},
          zoom: 13
        });
        var directionsService = new google.maps.DirectionsService;
