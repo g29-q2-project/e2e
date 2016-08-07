@@ -157,3 +157,11 @@ width: auto;
 .location-card-name {
   font-size: 22px;
 }
+
+.dropdown-container {
+  overflow: visible !important;
+}
+
+.select-dropdown {
+  color: #D1D1D1;
+}

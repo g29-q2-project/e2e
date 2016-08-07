@@ -8,30 +8,33 @@ block content
 			// start container
 			.container
 				.row
-					.col.s12.m6.l6
-						.card
-							.card-move-up.teal.waves-effect.waves-block.waves-light
-								.move-up
+					#origin-side.col.s12.m6.l6.dropdown-container
+						.card.dropdown-container
+							.card-move-up.teal.waves-block.waves-light.dropdown-container
+								.move-up.dropdown-container
 									h5.margin.white-text Start Location
-									input#origin-input.controls(type='text', name='trip_name', placeholder='starting location for your trip')
+									input#origin-input.controls(type='text', name='origin_address', placeholder='starting location for your trip')								
 									if locations
-										select#origin-dropdown
-											option(value='saved-trips', disabled='', selected='') Select a saved trip
+										select#origin-location-dropdown
+											option(value='origin-saved-location', disabled='', selected='') Select A Saved Location
 											for location in locations
-												option(value='#{location.name}') #{location.name}
+												option(value='#{location.formatted_address}') #{location.formatted_address}
 										label
-					.col.s12.m6.l6
-						.card
-							#trip-origin-card.card-move-up.teal.waves-effect.waves-block.waves-light
-								.move-up
+									button#input-custom-origin.btn-flat(style='display:none') Custom Origin
+					#destination-side.col.s12.m6.l6.dropdown-container
+						.card.dropdown-container
+							.card-move-up.teal.waves-block.waves-light.dropdown-container
+								.move-up.dropdown-container
 									h5.margin.white-text Destination Location
-									input#destination-input.controls(type='text', name='trip_name', placeholder='ending location for your trip')
+									input#destination-input.controls(type='text', name='destination_address', placeholder='starting location for your trip')
 									if locations
-										select#destination-dropdown
-											option(value='', disabled='', selected='') Select a saved trip
+										select#destination-location-dropdown
+											option(value='destination-saved-location', disabled='', selected='') Select A Saved Location
 											for location in locations
-												option(value='#{location.name}') #{location.name}
+												option(value='#{location.formatted_address}') #{location.formatted_address}
 										label
+									button#input-custom-destination.btn-flat(style='display:none') Custom Destination
+
 				.row
 					.input-field.col.s5.m3.l4
 						select#mode
@@ -45,6 +48,11 @@ block content
 					.col.s2.m2.offset-m1.l1.offset-l1
 						a#getDirections.btn-floating.valign.btn-large.waves-effect.waves-light.cyan
 							i.mdi-maps-directions
+					.col.s2.m2.l1
+						a#saveTrip.btn-floating.valign.btn-large.waves-effect.waves-light.light-green
+							i.mdi-content-save
+					.col.s12.m4.l4
+						input#destination-input.controls(type='text', name='trip_name', placeholder='name of this trip')
 						//- button#showTraffic traffic
 						//- button#showTransit transit
 						//- button#showBike bike

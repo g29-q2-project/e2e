@@ -87,6 +87,7 @@ function initMap() {
          bikeLayer.getMap() == null ? bikeLayer.setMap(map) : bikeLayer.setMap(null);
        })
 
+       
        var origin_input = document.getElementById('origin-input');
        var destination_input = document.getElementById('destination-input');
        var modes = document.getElementById('mode');

@@ -37,8 +37,17 @@ function reInitMap() {
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-  var startPoint = document.getElementById('origin-input').value;
-  var endPoint = document.getElementById('destination-input').value;
+  var originFromDropdown = document.getElementById('origin-location-dropdown')
+  var destinationFromDropdown = document.getElementById('destination-location-dropdown')
+  var startPoint
+  var endPoint
+
+  $('#origin-input').is(':visible') ? startPoint = document.getElementById('origin-input').value : startPoint = originFromDropdown.options[originFromDropdown.selectedIndex].value
+
+  $('#destination-input').is(':visible') ? endPoint = document.getElementById('destination-input').value : endPoint = destinationFromDropdown.options[destinationFromDropdown.selectedIndex].value
+
+
+
   console.log('start: ', startPoint, 'end: ',  endPoint);
 
   var select = document.getElementById('mode')
