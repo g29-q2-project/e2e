@@ -7,60 +7,61 @@ block content
 		section#content
 			// start container
 			.container
-				.row
-					#origin-side.col.s12.m6.l6.dropdown-container
-						.card.dropdown-container
-							.card-move-up.teal.waves-block.waves-light.dropdown-container
-								.move-up.dropdown-container
-									h5.margin.white-text Start Location
-									input#origin-input.controls(type='text', name='origin_address', placeholder='starting location for your trip')								
-									if locations
-										select#origin-location-dropdown
-											option(value='origin-saved-location', disabled='', selected='') Select A Saved Location
-											for location in locations
-												option(value='#{location.formatted_address}') #{location.formatted_address}
-										label
-									button#input-custom-origin.btn-flat(style='display:none') Custom Origin
-					#destination-side.col.s12.m6.l6.dropdown-container
-						.card.dropdown-container
-							.card-move-up.teal.waves-block.waves-light.dropdown-container
-								.move-up.dropdown-container
-									h5.margin.white-text Destination Location
-									input#destination-input.controls(type='text', name='destination_address', placeholder='starting location for your trip')
-									if locations
-										select#destination-location-dropdown
-											option(value='destination-saved-location', disabled='', selected='') Select A Saved Location
-											for location in locations
-												option(value='#{location.formatted_address}') #{location.formatted_address}
-										label
-									button#input-custom-destination.btn-flat(style='display:none') Custom Destination
+				form(action="/trips/new", method="POST")
+					.row
+						#origin-side.col.s12.m6.l6.dropdown-container
+							.card.dropdown-container
+								.card-move-up.teal.waves-block.waves-light.dropdown-container
+									.move-up.dropdown-container
+										h5.margin.white-text Start Location
+										input#origin-input.controls(type='text', name='new_origin_address', placeholder='starting location for your trip')								
+										if locations
+											select#origin-location-dropdown(name="existing_origin_address")
+												option(value='origin-saved-location', disabled='', selected='') Select A Saved Location
+												for location in locations
+													option(value='#{location.formatted_address}') #{location.formatted_address}
+											label
+										a#input-custom-origin.btn-flat(style='display:none') Custom Origin
+						#destination-side.col.s12.m6.l6.dropdown-container
+							.card.dropdown-container
+								.card-move-up.teal.waves-block.waves-light.dropdown-container
+									.move-up.dropdown-container
+										h5.margin.white-text Destination Location
+										input#destination-input.controls(type='text', name='new_destination_address', placeholder='starting location for your trip')
+										if locations
+											select#destination-location-dropdown(name="existing_destination_address")
+												option(value='destination-saved-location', disabled='', selected='') Select A Saved Location
+												for location in locations
+													option(value='#{location.formatted_address}') #{location.formatted_address}
+											label
+										a#input-custom-destination.btn-flat(style='display:none') Custom Destination
 
-				.row
-					.input-field.col.s5.m3.l4
-						select#mode
-							option(value='', disabled='', selected='') Select Your Mode
-							option(value='TRANSIT', id='changemode-transit') Transit
-							option(value='DRIVING', id='changemode-driving') Driving
-							option(value='BICYCLING', id='changemode-bicycling') Bicycling
-							option(value='WALKING', id='changemode-walking') Walking
-						label 
-
-					.col.s2.m2.offset-m1.l1.offset-l1
-						a#getDirections.btn-floating.valign.btn-large.waves-effect.waves-light.cyan
-							i.mdi-maps-directions
-					.col.s2.m2.l1
-						a#saveTrip.btn-floating.valign.btn-large.waves-effect.waves-light.light-green
-							i.mdi-content-save
-					.col.s12.m4.l4
-						input#destination-input.controls(type='text', name='trip_name', placeholder='name of this trip')
-						//- button#showTraffic traffic
-						//- button#showTransit transit
-						//- button#showBike bike
-					.col.s12.m12.l12
-						#jon_map.mobile-map
-
-
+					.row
+						.input-field.col.s5.m3.l4
+							select#mode(name="transit_mode")
+								option(value='', disabled='', selected='') Select Your Mode
+								option(value='TRANSIT', id='changemode-transit') Transit
+								option(value='DRIVING', id='changemode-driving') Driving
+								option(value='BICYCLING', id='changemode-bicycling') Bicycling
+								option(value='WALKING', id='changemode-walking') Walking
+							label 
+						.col.s2.m2.offset-m1.l1.offset-l1
+							a#getDirections.btn-floating.valign.btn-large.waves-effect.waves-light.cyan
+								i.mdi-maps-directions
+						.col.s2.m2.l1
+							button#saveTrip.btn-floating.valign.btn-large.waves-effect.waves-light.light-green(type="submit")
+								i.mdi-content-save
+						.col.s12.m4.l4
+							input#destination-input.controls(type='text', name='trip_name', placeholder='name of this trip')
+							//- button#showTraffic traffic
+							//- button#showTransit transit
+							//- button#showBike bike
+						.col.s12.m12.l12
+							#jon_map.mobile-map
+					
+					
 			// FOOTER
 			include ../../public/includes/footer.jade
 			// JS Scripts
 			include ../../public/includes/scripts.jade
+										
